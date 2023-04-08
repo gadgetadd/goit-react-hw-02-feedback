@@ -8,24 +8,35 @@ import { Notification } from './Notification/Notification';
 
 export class App extends Component {
   state = {
-    good: 1,
-    neutral: 1,
+    good: 0,
+    neutral: 0,
     bad: 0,
   };
 
-  countTotalFeedback() {
-    return this.state.good + this.state.neutral + this.state.bad;
-  }
+  feedbackHandler = option => {
+    this.setState(prev => {
+      return {
+        [option]: prev[option] + 1,
+      };
+    });
+  };
 
-  countPositiveFeedbackPercentage() {
+  countTotalFeedback = () => {
+    return this.state.good + this.state.neutral + this.state.bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
     return (100 / this.countTotalFeedback()) * this.state.good;
-  }
+  };
 
   render() {
     return (
       <>
         <Section title="Please leave feedback">
-          <FeedbackOptions options={this.state} />
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.feedbackHandler}
+          />
         </Section>
         <Section title="Statistics">
           {this.countTotalFeedback() === 0 ? (

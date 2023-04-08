@@ -1,15 +1,15 @@
 import { capitalize } from 'utilites/capitalize';
 
-export const FeedbackOptions = ({ options }) => {
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-  
-      <ul>
-        {Object.keys(options).map(key => (
-          <li key={key}>
-            <button type="button">{capitalize(key)}</button>
-          </li>
-        ))}
-      </ul>
-    
+    <ul>
+      {options.map(option => (
+        <li key={option}>
+          <button type="button" onClick={() => onLeaveFeedback(option)}>
+            {capitalize(option)}
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 };
