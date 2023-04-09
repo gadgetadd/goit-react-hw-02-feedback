@@ -1,15 +1,23 @@
+import PropTypes from 'prop-types';
+
 import { capitalize } from 'utilites/capitalize';
+import { BtnList, FeedbackBtn } from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <ul>
+    <BtnList>
       {options.map(option => (
         <li key={option}>
-          <button type="button" onClick={() => onLeaveFeedback(option)}>
+          <FeedbackBtn type="button" onClick={() => onLeaveFeedback(option)}>
             {capitalize(option)}
-          </button>
+          </FeedbackBtn>
         </li>
       ))}
-    </ul>
+    </BtnList>
   );
+};
+
+FeedbackOptions.propTypes = {
+  onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
